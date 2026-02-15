@@ -20,14 +20,17 @@ export default function SignIn() {
   };
 
   return (
-    <div className="py-6 sm:py-10">
+    <div className="min-h-screen bg-black text-white flex items-center justify-center px-4 py-10">
       <AuthShell
         title="Sign in"
         subtitle="This is a mock auth screen (no backend connected)."
         footer={
           <>
             Don’t have an account?{" "}
-            <Link to="/signup" className="font-semibold text-white/80 hover:text-white">
+            <Link
+              to="/signup"
+              className="font-semibold text-white/80 hover:text-white"
+            >
               Sign up
             </Link>
           </>
@@ -49,7 +52,10 @@ export default function SignIn() {
           </div>
 
           <div>
-            <label htmlFor="password" className="text-sm font-semibold text-white/70">
+            <label
+              htmlFor="password"
+              className="text-sm font-semibold text-white/70"
+            >
               Password
             </label>
             <input
