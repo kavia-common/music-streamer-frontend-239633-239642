@@ -3,19 +3,22 @@ import { BrowserRouter, useLocation } from "react-router-dom";
 import AppLayout from "./components/layout/AppLayout";
 import AppRouter from "./routes/AppRouter";
 import { PlayerProvider } from "./context/PlayerContext";
+import { UISettingsProvider, useUISettings } from "./context/UISettingsContext";
 import { getPlaylists } from "./services/catalogService";
 import "./App.css";
 
 function AppShell({ playlists }) {
   const location = useLocation();
+  const { settings } = useUISettings();
 
-  // Auth routes should render as true full-viewport pages (no app chrome).
   const isAuthRoute =
     location.pathname === "/signin" || location.pathname === "/signup";
 
-  if (isAuthRoute) {
-    // Full viewport container to ensure auth pages are not confined
-    // to the app's main content area.
+  // When enabled, auth routes are rendered as true full-viewport pages (no app chrome).
+  // When disabled, auth routes render inside the normal AppLayout.
+  const authIsFullscreen = settings.authLayoutMode === "fullscreen";
+
+  if (isAuthRoute && authIsFullscreen) {
     return (
       <div className="min-h-screen bg-black text-white">
         <AppRouter />
@@ -49,9 +52,11 @@ function App() {
 
   return (
     <PlayerProvider>
-      <BrowserRouter>
-        <AppShell playlists={playlists} />
-      </BrowserRouter>
+      <UISettingsProvider>
+        <BrowserRouter>
+          <AppShell playlists={playlists} />
+        </BrowserRouter>
+      </UISettingsProvider>
     </PlayerProvider>
   );
 }

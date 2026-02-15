@@ -4,6 +4,7 @@ import Home from "../pages/Home";
 import Search from "../pages/Search";
 import Library from "../pages/Library";
 import Playlist from "../pages/Playlist";
+import Settings from "../pages/Settings";
 import SignIn from "../pages/SignIn";
 import SignUp from "../pages/SignUp";
 import NotFound from "../pages/NotFound";
@@ -17,6 +18,7 @@ export default function AppRouter() {
       <Route path="/search" element={<Search />} />
       <Route path="/library" element={<Library />} />
       <Route path="/playlist/:playlistId" element={<Playlist />} />
+      <Route path="/settings" element={<Settings />} />
       <Route path="/signin" element={<SignIn />} />
       <Route path="/signup" element={<SignUp />} />
       <Route path="*" element={<NotFound />} />

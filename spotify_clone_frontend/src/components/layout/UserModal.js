@@ -64,11 +64,11 @@ export default function UserModal({ open, onClose }) {
           <div className="grid grid-cols-1 gap-2">
             <button
               type="button"
-              onClick={() => onClose?.()}
+              onClick={() => go("/settings")}
               className="flex items-center gap-3 rounded-xl px-3 py-2 text-sm text-white/80 transition hover:bg-white/5 focus:outline-none focus-visible:ring-2 focus-visible:ring-spotify-green/70"
             >
               <FaCog className="h-4 w-4 text-white/60" />
-              Settings (mock)
+              Settings
             </button>
             <button
               type="button"
