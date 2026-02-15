@@ -5,7 +5,7 @@ const STORAGE_KEY = "spotifyClone.uiSettings.v1";
 const UISettingsContext = createContext(null);
 
 /**
- * @typedef {"fullscreen"|"inapp"} AuthLayoutMode
+ * @typedef {"light"|"dark"} ThemeMode
  */
 
 function safeParseJSON(value) {
@@ -14,6 +14,21 @@ function safeParseJSON(value) {
   } catch {
     return null;
   }
+}
+
+/**
+ * Applies the theme to the document root element by toggling Tailwind's `dark` class.
+ * Also updates `color-scheme` to improve form controls / scrollbars in supported browsers.
+ */
+function applyThemeToRoot(theme) {
+  if (typeof document === "undefined") return;
+
+  const root = document.documentElement;
+  const isDark = theme === "dark";
+  root.classList.toggle("dark", isDark);
+
+  // Helps native UI elements match the theme.
+  root.style.colorScheme = isDark ? "dark" : "light";
 }
 
 function readInitialSettings() {
@@ -27,28 +42,29 @@ function readInitialSettings() {
   if (!parsed || typeof parsed !== "object") return null;
 
   // Only accept known fields to avoid older/unknown keys causing issues.
-  const authLayoutMode =
-    parsed.authLayoutMode === "fullscreen" || parsed.authLayoutMode === "inapp"
-      ? parsed.authLayoutMode
-      : undefined;
+  const theme = parsed.theme === "light" || parsed.theme === "dark" ? parsed.theme : undefined;
 
   return {
-    ...(authLayoutMode ? { authLayoutMode } : {})
+    ...(theme ? { theme } : {})
   };
 }
 
 const defaultSettings = {
-  // Keep current behavior as default to avoid breaking existing navigation.
-  authLayoutMode: "fullscreen"
+  theme: "dark"
 };
 
 // PUBLIC_INTERFACE
 export function UISettingsProvider({ children }) {
-  /** Provides persisted UI settings (e.g., auth layout mode) across the app. */
+  /** Provides persisted UI settings (e.g., theme) across the app. */
   const [settings, setSettings] = useState(() => {
     const initial = readInitialSettings();
     return { ...defaultSettings, ...(initial ?? {}) };
   });
+
+  useEffect(() => {
+    // Apply theme changes immediately so the entire UI updates.
+    applyThemeToRoot(settings.theme);
+  }, [settings.theme]);
 
   useEffect(() => {
     // Persist any changes.
@@ -64,26 +80,24 @@ export function UISettingsProvider({ children }) {
       settings,
 
       // PUBLIC_INTERFACE
-      setAuthLayoutMode: (mode) => {
-        /** Sets the auth layout mode ("fullscreen" vs "inapp") and persists it. */
-        setSettings((prev) => ({ ...prev, authLayoutMode: mode }));
+      setTheme: (theme) => {
+        /** Sets the theme ("light" vs "dark") and persists it. */
+        setSettings((prev) => ({ ...prev, theme }));
       },
 
       // PUBLIC_INTERFACE
-      toggleAuthLayoutMode: () => {
-        /** Convenience toggle for auth layout mode. */
+      toggleTheme: () => {
+        /** Convenience toggle for theme. */
         setSettings((prev) => ({
           ...prev,
-          authLayoutMode: prev.authLayoutMode === "fullscreen" ? "inapp" : "fullscreen"
+          theme: prev.theme === "dark" ? "light" : "dark"
         }));
       }
     };
   }, [settings]);
 
   return (
-    <UISettingsContext.Provider value={api}>
-      {children}
-    </UISettingsContext.Provider>
+    <UISettingsContext.Provider value={api}>{children}</UISettingsContext.Provider>
   );
 }
 
