@@ -4,6 +4,8 @@ import Home from "../pages/Home";
 import Search from "../pages/Search";
 import Library from "../pages/Library";
 import Playlist from "../pages/Playlist";
+import SignIn from "../pages/SignIn";
+import SignUp from "../pages/SignUp";
 import NotFound from "../pages/NotFound";
 
 // PUBLIC_INTERFACE
@@ -15,6 +17,8 @@ export default function AppRouter() {
       <Route path="/search" element={<Search />} />
       <Route path="/library" element={<Library />} />
       <Route path="/playlist/:playlistId" element={<Playlist />} />
+      <Route path="/signin" element={<SignIn />} />
+      <Route path="/signup" element={<SignUp />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   );

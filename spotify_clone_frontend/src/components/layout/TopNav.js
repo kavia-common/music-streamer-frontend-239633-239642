@@ -1,13 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { FaChevronLeft, FaChevronRight, FaUserCircle } from "react-icons/fa";
 import IconButton from "../ui/IconButton";
+import UserModal from "./UserModal";
 
 // PUBLIC_INTERFACE
 export default function TopNav() {
   /** Sticky top nav for the main content area. */
   const navigate = useNavigate();
   const location = useLocation();
+  const [userModalOpen, setUserModalOpen] = useState(false);
 
   const title = (() => {
     if (location.pathname === "/") return "Home";
@@ -32,12 +34,17 @@ export default function TopNav() {
       <div className="flex items-center gap-2">
         <button
           type="button"
+          onClick={() => setUserModalOpen(true)}
           className="hidden sm:inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1.5 text-sm font-semibold text-white/90 hover:bg-white/15 transition focus:outline-none focus-visible:ring-2 focus-visible:ring-spotify-green/70"
+          aria-label="Open account menu"
+          title="Account"
         >
           <FaUserCircle className="h-4 w-4" />
           Demo User
         </button>
       </div>
+
+      <UserModal open={userModalOpen} onClose={() => setUserModalOpen(false)} />
     </div>
   );
 }
