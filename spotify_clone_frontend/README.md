@@ -1,82 +1,60 @@
-# Lightweight React Template for KAVIA
+# Spotify Clone Frontend (React-only)
 
-This project provides a minimal React template with a clean, modern UI and minimal dependencies.
+A production-style, frontend-only Spotify-like UI built with:
+- React 18 (CRA)
+- React Router
+- Tailwind CSS
+- Context API state management (playback/queue/likes)
+- Mock data + service layer (async) to simulate backend calls
 
-## Features
+## Layout & UX
+- Left Sidebar (desktop) for navigation + playlists
+- Sticky TopNav inside main content
+- Main content routes: Home, Search, Library, Playlist
+- Bottom Player pinned to the viewport bottom
 
-- **Lightweight**: No heavy UI frameworks - uses only vanilla CSS and React
-- **Modern UI**: Clean, responsive design with KAVIA brand styling
-- **Fast**: Minimal dependencies for quick loading times
-- **Simple**: Easy to understand and modify
+## Folder structure (high level)
+- `src/components/`
+  - `layout/` (Sidebar, TopNav, AppLayout)
+  - `player/` (BottomPlayer)
+  - `cards/` (PlaylistCard)
+  - `list/` (TrackRow)
+  - `ui/` (IconButton)
+- `src/pages/` route pages
+- `src/context/` Context API providers (PlayerProvider)
+- `src/data/` mock data
+- `src/services/` “API-like” service layer (mock async)
 
-## Getting Started
+## State flow (PlayerContext)
+Single source of truth for:
+- `currentTrack`, `isPlaying`
+- `queue`, `queueIndex`
+- `likedTrackIds`
+- `volume`, `shuffle`, `repeatMode`
 
-In the project directory, you can run:
+UI events (play, next, like, etc.) dispatch reducer actions. No backend required.
 
-### `npm start`
-
-Runs the app in development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-### `npm test`
-
-Launches the test runner in interactive watch mode.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-## Customization
-
-### Colors
-
-The main brand colors are defined as CSS variables in `src/App.css`:
-
-```css
-:root {
-  --kavia-orange: #E87A41;
-  --kavia-dark: #1A1A1A;
-  --text-color: #ffffff;
-  --text-secondary: rgba(255, 255, 255, 0.7);
-  --border-color: rgba(255, 255, 255, 0.1);
-}
+## Setup
+```bash
+npm install
+npm start
 ```
 
-### Components
+## Tailwind
+Already wired via:
+- `tailwind.config.js`
+- `postcss.config.js`
+- `src/index.css` includes Tailwind layers
 
-This template uses pure HTML/CSS components instead of a UI framework. You can find component styles in `src/App.css`. 
+## Backend integration suggestions (future)
+Keep the UI unchanged and swap the mock service layer with real network calls:
+- Replace `src/services/catalogService.js` functions with `fetch`/axios calls to your backend.
+- Use env vars:
+  - `REACT_APP_API_BASE` / `REACT_APP_BACKEND_URL` for REST base URL
+  - `REACT_APP_WS_URL` if you later add real-time events (e.g., collaborative sessions)
 
-Common components include:
-- Buttons (`.btn`, `.btn-large`)
-- Container (`.container`)
-- Navigation (`.navbar`)
-- Typography (`.title`, `.subtitle`, `.description`)
-
-## Learn More
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Recommended next steps:
+- Add auth (OAuth / Supabase / custom backend)
+- Persist likes/playlists with a database
+- Real audio playback via `<audio>` element + streaming URLs
+- Improve mobile with a collapsible sidebar and bottom-sheet queue
