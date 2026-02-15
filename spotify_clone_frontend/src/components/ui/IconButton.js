@@ -19,8 +19,10 @@ export default function IconButton({
       onClick={onClick}
       disabled={disabled}
       className={classNames(
-        "inline-flex items-center justify-center rounded-full p-2 text-white/80 transition",
-        "hover:bg-white/10 hover:text-white disabled:opacity-40 disabled:hover:bg-transparent",
+        "inline-flex items-center justify-center rounded-full p-2 transition",
+        "text-black/70 hover:bg-black/10 hover:text-black",
+        "dark:text-white/80 dark:hover:bg-white/10 dark:hover:text-white",
+        "disabled:opacity-40 disabled:hover:bg-transparent",
         "focus:outline-none focus-visible:ring-2 focus-visible:ring-spotify-green/70",
         className
       )}

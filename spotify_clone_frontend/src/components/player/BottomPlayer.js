@@ -33,7 +33,7 @@ export default function BottomPlayer() {
   const track = state.currentTrack;
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-30 border-t border-white/10 bg-spotify-dark shadow-top">
+    <div className="fixed bottom-0 left-0 right-0 z-30 border-t border-black/10 bg-white shadow-top dark:border-white/10 dark:bg-spotify-dark">
       <div className="mx-auto grid max-w-screen-2xl grid-cols-1 md:grid-cols-[1fr_1.2fr_1fr] items-center gap-4 px-4 py-3">
         {/* Now playing */}
         <div className="flex items-center gap-3 min-w-0">
@@ -44,10 +44,10 @@ export default function BottomPlayer() {
             }}
           />
           <div className="min-w-0">
-            <div className="truncate text-sm font-semibold text-white">
+            <div className="truncate text-sm font-semibold text-black dark:text-white">
               {track ? track.title : "Select a track"}
             </div>
-            <div className="truncate text-xs text-white/60">
+            <div className="truncate text-xs text-black/60 dark:text-white/60">
               {track ? track.artist : "Your queue will appear here"}
             </div>
           </div>
@@ -94,7 +94,7 @@ export default function BottomPlayer() {
             </IconButton>
           </div>
 
-          <div className="hidden md:flex items-center gap-2 text-xs text-white/60">
+          <div className="hidden md:flex items-center gap-2 text-xs text-black/60 dark:text-white/60">
             {state.queue.length ? (
               <span className="tabular-nums">
                 Queue: {Math.max(state.queueIndex + 1, 0)}/{state.queue.length}
@@ -107,7 +107,7 @@ export default function BottomPlayer() {
 
         {/* Volume */}
         <div className="hidden md:flex items-center justify-end gap-3">
-          <FaVolumeUp className="h-4 w-4 text-white/70" />
+          <FaVolumeUp className="h-4 w-4 text-black/70 dark:text-white/70" />
           <input
             aria-label="Volume"
             type="range"

@@ -5,18 +5,31 @@ import { FaSpotify, FaHome, FaSearch, FaBook } from "react-icons/fa";
 // PUBLIC_INTERFACE
 export default function Sidebar({ playlists }) {
   /** Left sidebar navigation with primary routes and playlist shortcuts. */
+
   const linkClass = ({ isActive }) =>
     [
       "flex items-center gap-3 rounded-md px-3 py-2 text-sm font-semibold transition",
-      isActive ? "bg-white/10 text-white" : "text-white/70 hover:text-white hover:bg-white/5"
+      "text-black/70 hover:text-black hover:bg-black/5",
+      "dark:text-white/70 dark:hover:text-white dark:hover:bg-white/5",
+      isActive ? "bg-black/10 text-black dark:bg-white/10 dark:text-white" : ""
+    ].join(" ");
+
+  const playlistLinkClass = ({ isActive }) =>
+    [
+      "block truncate rounded-md px-3 py-2 text-sm transition",
+      "text-black/70 hover:text-black hover:bg-black/5",
+      "dark:text-white/70 dark:hover:text-white dark:hover:bg-white/5",
+      isActive ? "bg-black/10 text-black dark:bg-white/10 dark:text-white" : ""
     ].join(" ");
 
   return (
     <aside className="hidden md:flex md:w-64 md:flex-col md:gap-2 md:p-3">
-      <div className="rounded-xl bg-spotify-black p-3">
+      <div className="rounded-xl border border-black/5 bg-white p-3 shadow-sm dark:border-white/5 dark:bg-spotify-black dark:shadow-none">
         <div className="flex items-center gap-2 px-2 py-2">
           <FaSpotify className="h-6 w-6 text-spotify-green" />
-          <div className="text-sm font-bold tracking-wide text-white">Spotify Clone</div>
+          <div className="text-sm font-bold tracking-wide text-black dark:text-white">
+            Spotify Clone
+          </div>
         </div>
 
         <nav className="mt-2 space-y-1">
@@ -35,8 +48,8 @@ export default function Sidebar({ playlists }) {
         </nav>
       </div>
 
-      <div className="flex-1 overflow-hidden rounded-xl bg-spotify-black p-3">
-        <div className="px-2 pb-2 text-xs font-bold uppercase tracking-wider text-white/60">
+      <div className="flex-1 overflow-hidden rounded-xl border border-black/5 bg-white p-3 shadow-sm dark:border-white/5 dark:bg-spotify-black dark:shadow-none">
+        <div className="px-2 pb-2 text-xs font-bold uppercase tracking-wider text-black/50 dark:text-white/60">
           Playlists
         </div>
         <div className="h-full overflow-auto pr-1">
@@ -45,14 +58,7 @@ export default function Sidebar({ playlists }) {
               <NavLink
                 key={p.id}
                 to={`/playlist/${p.id}`}
-                className={({ isActive }) =>
-                  [
-                    "block truncate rounded-md px-3 py-2 text-sm transition",
-                    isActive
-                      ? "bg-white/10 text-white"
-                      : "text-white/70 hover:text-white hover:bg-white/5"
-                  ].join(" ")
-                }
+                className={playlistLinkClass}
                 title={p.name}
               >
                 {p.name}

@@ -27,7 +27,7 @@ export default function Home() {
     <div className="space-y-8">
       <section>
         <h2 className="text-2xl font-bold">Good afternoon</h2>
-        <p className="mt-1 text-sm text-white/60">
+        <p className="mt-1 text-sm text-black/60 dark:text-white/60">
           Frontend-only Spotify clone UI with mock data and Context API playback state.
         </p>
 
@@ -36,7 +36,7 @@ export default function Home() {
             <button
               key={p.id}
               type="button"
-              className="group flex items-center gap-3 overflow-hidden rounded-lg bg-white/5 pr-3 transition hover:bg-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-spotify-green/70"
+              className="group flex items-center gap-3 overflow-hidden rounded-lg border border-black/5 bg-white pr-3 shadow-sm transition hover:bg-black/[0.03] focus:outline-none focus-visible:ring-2 focus-visible:ring-spotify-green/70 dark:border-white/5 dark:bg-white/5 dark:shadow-none dark:hover:bg-white/10"
             >
               <div
                 className="h-14 w-14 flex-none"
@@ -45,10 +45,10 @@ export default function Home() {
                 }}
               />
               <div className="min-w-0">
-                <div className="truncate text-sm font-semibold text-white">{p.name}</div>
-                <div className="truncate text-xs text-white/60">Playlist</div>
+                <div className="truncate text-sm font-semibold text-black dark:text-white">{p.name}</div>
+                <div className="truncate text-xs text-black/60 dark:text-white/60">Playlist</div>
               </div>
-              <div className="ml-auto opacity-0 transition group-hover:opacity-100 text-xs text-white/70">
+              <div className="ml-auto opacity-0 transition group-hover:opacity-100 text-xs text-black/50 dark:text-white/70">
                 Open
               </div>
             </button>
@@ -61,7 +61,7 @@ export default function Home() {
           <div className="flex items-end justify-between">
             <div>
               <h3 className="text-xl font-bold">{s.title}</h3>
-              <p className="mt-1 text-sm text-white/60">{s.subtitle}</p>
+              <p className="mt-1 text-sm text-black/60 dark:text-white/60">{s.subtitle}</p>
             </div>
           </div>
 

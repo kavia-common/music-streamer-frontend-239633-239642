@@ -22,8 +22,8 @@ export default function TrackRow({ track, queue, index }) {
     <div
       className={[
         "grid grid-cols-[28px_1fr_90px] items-center gap-3 rounded-md px-2 py-2",
-        "hover:bg-white/5 transition",
-        isCurrent ? "bg-white/8" : ""
+        "hover:bg-black/5 dark:hover:bg-white/5 transition",
+        isCurrent ? "bg-black/5 dark:bg-white/8" : ""
       ].join(" ")}
     >
       <div className="flex items-center justify-center">
@@ -38,21 +38,21 @@ export default function TrackRow({ track, queue, index }) {
 
       <div className="min-w-0">
         <div className="flex items-center gap-2 min-w-0">
-          <div className="truncate font-medium text-white">
+          <div className="truncate font-medium text-black dark:text-white">
             {track.title}
           </div>
           {track.explicit ? (
-            <span className="rounded bg-white/20 px-1.5 py-0.5 text-[10px] font-semibold text-white/80">
+            <span className="rounded bg-black/10 px-1.5 py-0.5 text-[10px] font-semibold text-black/70 dark:bg-white/20 dark:text-white/80">
               E
             </span>
           ) : null}
         </div>
-        <div className="truncate text-sm text-white/60">
+        <div className="truncate text-sm text-black/60 dark:text-white/60">
           {track.artist} • {track.album}
         </div>
       </div>
 
-      <div className="flex items-center justify-end gap-2 text-sm text-white/60">
+      <div className="flex items-center justify-end gap-2 text-sm text-black/60 dark:text-white/60">
         <IconButton
           label={liked ? "Unlike" : "Like"}
           className="p-1"

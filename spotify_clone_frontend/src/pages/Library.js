@@ -23,12 +23,12 @@ export default function Library() {
 
   return (
     <div className="space-y-6">
-      <div className="rounded-xl bg-white/5 p-5">
-        <div className="text-sm font-semibold text-white/80">Liked Songs</div>
-        <div className="mt-1 text-2xl font-bold text-white">
+      <div className="rounded-xl border border-black/5 bg-white p-5 shadow-sm dark:border-white/5 dark:bg-white/5 dark:shadow-none">
+        <div className="text-sm font-semibold text-black/80 dark:text-white/80">Liked Songs</div>
+        <div className="mt-1 text-2xl font-bold text-black dark:text-white">
           {state.likedTrackIds.size}
         </div>
-        <div className="mt-1 text-sm text-white/60">
+        <div className="mt-1 text-sm text-black/60 dark:text-white/60">
           Tracks you’ve liked in this session (stored in memory).
         </div>
       </div>

@@ -32,7 +32,7 @@ export default function Search() {
     <div className="space-y-8">
       <section>
         <div className="max-w-2xl">
-          <label className="text-sm font-semibold text-white/70" htmlFor="searchInput">
+          <label className="text-sm font-semibold text-black/70 dark:text-white/70" htmlFor="searchInput">
             Search
           </label>
           <input
@@ -40,9 +40,9 @@ export default function Search() {
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="What do you want to listen to?"
-            className="mt-2 w-full rounded-full bg-white/10 px-4 py-3 text-white placeholder:text-white/40 outline-none ring-1 ring-white/10 focus:ring-2 focus:ring-spotify-green/70"
+            className="mt-2 w-full rounded-full bg-black/5 px-4 py-3 text-black placeholder:text-black/40 outline-none ring-1 ring-black/10 focus:ring-2 focus:ring-spotify-green/70 dark:bg-white/10 dark:text-white dark:placeholder:text-white/40 dark:ring-white/10"
           />
-          <div className="mt-2 text-xs text-white/50">
+          <div className="mt-2 text-xs text-black/50 dark:text-white/50">
             {loading ? "Searching..." : "Tip: try “mix”, “chill”, “city”, “moon”"}
           </div>
         </div>
@@ -56,7 +56,7 @@ export default function Search() {
               <TrackRow key={t.id} track={t} queue={queue} index={idx} />
             ))
           ) : (
-            <div className="rounded-lg bg-white/5 p-4 text-sm text-white/60">
+            <div className="rounded-lg border border-black/5 bg-white p-4 text-sm text-black/60 shadow-sm dark:border-white/5 dark:bg-white/5 dark:text-white/60 dark:shadow-none">
               No songs found.
             </div>
           )}
@@ -69,7 +69,7 @@ export default function Search() {
           {(results.playlists ?? []).length ? (
             results.playlists.map((p) => <PlaylistCard key={p.id} playlist={p} />)
           ) : (
-            <div className="col-span-full rounded-lg bg-white/5 p-4 text-sm text-white/60">
+            <div className="col-span-full rounded-lg border border-black/5 bg-white p-4 text-sm text-black/60 shadow-sm dark:border-white/5 dark:bg-white/5 dark:text-white/60 dark:shadow-none">
               No playlists found.
             </div>
           )}

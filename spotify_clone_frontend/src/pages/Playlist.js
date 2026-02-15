@@ -31,7 +31,7 @@ export default function Playlist() {
 
   if (loading) {
     return (
-      <div className="rounded-lg bg-white/5 p-6 text-sm text-white/60">
+      <div className="rounded-lg border border-black/5 bg-white p-6 text-sm text-black/60 shadow-sm dark:border-white/5 dark:bg-white/5 dark:text-white/60 dark:shadow-none">
         Loading playlist...
       </div>
     );
@@ -39,7 +39,7 @@ export default function Playlist() {
 
   if (!playlist) {
     return (
-      <div className="rounded-lg bg-white/5 p-6 text-sm text-white/60">
+      <div className="rounded-lg border border-black/5 bg-white p-6 text-sm text-black/60 shadow-sm dark:border-white/5 dark:bg-white/5 dark:text-white/60 dark:shadow-none">
         Playlist not found.
       </div>
     );
@@ -55,13 +55,13 @@ export default function Playlist() {
           }}
         />
         <div className="min-w-0">
-          <div className="text-xs font-bold uppercase tracking-wider text-white/60">
+          <div className="text-xs font-bold uppercase tracking-wider text-black/60 dark:text-white/60">
             Playlist
           </div>
-          <h1 className="mt-2 truncate text-3xl font-extrabold text-white md:text-5xl">
+          <h1 className="mt-2 truncate text-3xl font-extrabold text-black dark:text-white md:text-5xl">
             {playlist.name}
           </h1>
-          <p className="mt-2 max-w-2xl text-sm text-white/60">
+          <p className="mt-2 max-w-2xl text-sm text-black/60 dark:text-white/60">
             {playlist.description}
           </p>
 
@@ -75,7 +75,7 @@ export default function Playlist() {
               <FaPlay className="h-4 w-4" />
               Play
             </button>
-            <div className="text-sm text-white/60">
+            <div className="text-sm text-black/60 dark:text-white/60">
               {queue.length} songs
             </div>
           </div>
@@ -83,7 +83,7 @@ export default function Playlist() {
       </section>
 
       <section>
-        <div className="mb-3 text-sm font-semibold text-white/70">Tracks</div>
+        <div className="mb-3 text-sm font-semibold text-black/70 dark:text-white/70">Tracks</div>
         <div className="space-y-1">
           {queue.map((t, idx) => (
             <TrackRow key={t.id} track={t} queue={queue} index={idx} />
